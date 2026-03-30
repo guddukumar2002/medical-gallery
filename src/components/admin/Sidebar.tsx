@@ -72,9 +72,9 @@ function SidebarContent({ onClose }: { onClose?: () => void }) {
                       "flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-150 group",
                       isActive
                         ? "bg-blue-600 text-white shadow-lg shadow-blue-600/20"
-                        : "item" in item && (item as {highlight?: boolean}).highlight
-                        ? "text-slate-400 hover:bg-slate-800 hover:text-white border border-slate-700/50"
-                        : "text-slate-400 hover:bg-slate-800 hover:text-white"
+                        : "item" in item && (item as { highlight?: boolean }).highlight
+                          ? "text-slate-400 hover:bg-slate-800 hover:text-white border border-slate-700/50"
+                          : "text-slate-400 hover:bg-slate-800 hover:text-white"
                     )}
                   >
                     <span className="flex-shrink-0">{item.icon}</span>
@@ -117,12 +117,15 @@ export default function Sidebar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   return (
     <>
-      <button onClick={() => setMobileOpen(true)} className="lg:hidden fixed top-4 left-4 z-40 w-9 h-9 bg-slate-800 text-white rounded-lg flex items-center justify-center shadow-lg border border-slate-700" aria-label="Open menu">
+      <button
+        onClick={() => setMobileOpen(true)}
+        className="lg:hidden fixed top-4 left-4 z-60 w-9 h-9 bg-slate-800 text-white rounded-lg flex items-center justify-center shadow-lg border border-slate-700"
+      >
         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" /></svg>
       </button>
       <aside className="hidden lg:flex flex-shrink-0"><SidebarContent /></aside>
       {mobileOpen && (
-        <div className="lg:hidden fixed inset-0 z-50 flex">
+        <div className="lg:hidden fixed top-16 left-0 right-0 bottom-0 z-50 flex">
           <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={() => setMobileOpen(false)} />
           <div className="relative z-10"><SidebarContent onClose={() => setMobileOpen(false)} /></div>
         </div>
