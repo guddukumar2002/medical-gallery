@@ -1,0 +1,57 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  name      String
+  role      Role     @default(ADMIN)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([email])
+}
+
+model Category {
+  id           String        @id @default(cuid())
+  name         String        @unique
+  slug         String        @unique
+  description  String?
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  medicalFiles MedicalFile[]
+
+  @@index([slug])
+}
+
+model MedicalFile {
+  id          String   @id @default(cuid())
+  title       String
+  description String?
+  fileUrl     String
+  fileKey     String
+  fileType    FileType
+  fileSize    Int
+  categoryId  String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  category    Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+
+  @@index([categoryId])
+  @@index([createdAt])
+}
+
+enum Role {
+  ADMIN
+}
+
+enum FileType {
+  IMAGE
+  PDF
+}
