@@ -78,7 +78,7 @@ export default function FilesPage() {
   return (
     <>
       <Topbar title="Manage Files" subtitle="Edit, delete, and preview uploaded files" />
-      <div className="flex-1 overflow-auto p-6 space-y-5">
+      <div className="flex-1 overflow-auto p-6 mt-20 space-y-5">
         {/* Toolbar */}
         <div className="flex flex-col sm:flex-row gap-3">
           <div className="relative flex-1">

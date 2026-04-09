@@ -69,7 +69,7 @@ export default function UploadPage() {
   return (
     <>
       <Topbar title="Upload File" subtitle="Add a new medical file to the gallery" />
-      <div className="flex-1 overflow-auto p-6">
+      <div className="flex-1 overflow-auto p-6 mt-20">
         <div className="max-w-2xl mx-auto">
           <form onSubmit={handleSubmit} className="space-y-5">
 

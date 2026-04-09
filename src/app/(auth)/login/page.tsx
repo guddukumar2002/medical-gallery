@@ -4,6 +4,9 @@ import { signIn } from "next-auth/react";
 import { useRouter, useSearchParams } from "next/navigation";
 import toast from "react-hot-toast";
 
+const DEMO_EMAIL = "admin@medgallery.com";
+const DEMO_PASSWORD = "Admin@2112";
+
 function LoginForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -11,20 +14,25 @@ function LoginForm() {
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [errors, setErrors] = useState<{ email?: string; password?: string }>({});
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  function fillDemo() {
+    setEmail(DEMO_EMAIL);
+    setPassword(DEMO_PASSWORD);
+    setErrors({});
+  }
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setErrors({});
-    const fd = new FormData(e.currentTarget);
-    const email = (fd.get("email") as string).trim();
-    const password = fd.get("password") as string;
     const newErrors: { email?: string; password?: string } = {};
-    if (!email) newErrors.email = "Email is required";
+    if (!email.trim()) newErrors.email = "Email is required";
     if (!password) newErrors.password = "Password is required";
     if (Object.keys(newErrors).length) { setErrors(newErrors); return; }
     setLoading(true);
     try {
-      const result = await signIn("credentials", { email, password, redirect: false });
+      const result = await signIn("credentials", { email: email.trim(), password, redirect: false });
       if (result?.error) { toast.error("Invalid email or password"); }
       else { toast.success("Welcome back!"); router.push(callbackUrl); router.refresh(); }
     } finally { setLoading(false); }
@@ -80,9 +88,36 @@ function LoginForm() {
           </div>
 
           <div className="rounded-2xl shadow-2xl p-8 border border-slate-700/50" style={{ background: "#1e293b" }}>
-            <div className="mb-7">
+            <div className="mb-6">
               <h1 className="text-2xl font-bold text-white">Welcome back</h1>
               <p className="text-slate-500 text-sm mt-1">Sign in to your admin account to continue</p>
+            </div>
+
+            {/* Demo credentials banner */}
+            <div className="mb-6 rounded-xl border border-blue-500/30 bg-blue-500/10 p-4">
+              <p className="text-xs font-semibold text-blue-300 mb-3 flex items-center gap-1.5">
+                <span>🎯</span> Demo Credentials — click to auto-fill
+              </p>
+              <div className="flex items-center justify-between gap-3">
+                <div className="space-y-1">
+                  <p className="text-xs text-slate-400">
+                    Email: <span className="text-slate-200 font-mono select-all">{DEMO_EMAIL}</span>
+                  </p>
+                  <p className="text-xs text-slate-400">
+                    Password: <span className="text-slate-200 font-mono select-all">{DEMO_PASSWORD}</span>
+                  </p>
+                </div>
+                <button
+                  type="button"
+                  onClick={fillDemo}
+                  className="flex-shrink-0 flex items-center gap-1.5 px-3 py-2 text-xs font-semibold bg-blue-600 hover:bg-blue-500 active:scale-95 text-white rounded-lg transition-all"
+                >
+                  <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                  </svg>
+                  Use Demo
+                </button>
+              </div>
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-5" noValidate>
@@ -93,6 +128,8 @@ function LoginForm() {
                   id="email" name="email" type="email"
                   placeholder="admin@medgallery.com"
                   autoComplete="email" autoFocus
+                  value={email}
+                  onChange={(e) => { setEmail(e.target.value); setErrors((p) => ({ ...p, email: "" })); }}
                   className={`w-full px-4 py-3 rounded-xl border text-sm text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all bg-white/5 ${errors.email ? "border-red-500/50" : "border-white/10"}`}
                 />
                 {errors.email && <p className="text-xs text-red-400">{errors.email}</p>}
@@ -107,6 +144,8 @@ function LoginForm() {
                     type={showPassword ? "text" : "password"}
                     placeholder="••••••••"
                     autoComplete="current-password"
+                    value={password}
+                    onChange={(e) => { setPassword(e.target.value); setErrors((p) => ({ ...p, password: "" })); }}
                     className={`w-full px-4 py-3 pr-12 rounded-xl border text-sm text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all bg-white/5 ${errors.password ? "border-red-500/50" : "border-white/10"}`}
                   />
                   <button type="button" onClick={() => setShowPassword(!showPassword)}

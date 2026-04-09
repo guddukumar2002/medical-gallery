@@ -44,7 +44,7 @@ export default function DashboardPage() {
   return (
     <>
       <Topbar title="Dashboard" subtitle="Overview of your medical file gallery" />
-      <div className="flex-1 overflow-auto p-6 mt-16 space-y-6">
+      <div className="flex-1 overflow-auto p-6 mt-20 space-y-6">
 
         {/* Stat cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">

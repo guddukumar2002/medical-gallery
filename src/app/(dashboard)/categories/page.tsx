@@ -69,11 +69,11 @@ export default function CategoriesPage() {
   return (
     <>
       <Topbar title="Categories" subtitle="Organize your medical files by category" />
-      <div className="flex-1 overflow-auto p-6">
+      <div className="flex-1 overflow-auto p-6 mt-20">
         <div className="flex items-center justify-between mb-6">
           <p className="text-sm text-slate-500">{loading ? "Loading…" : `${categories.length} categories · ${totalFiles} total files`}</p>
-          <Button onClick={openCreate}>
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" /></svg>
+          <Button onClick={openCreate} size="sm" className="text-xs sm:text-sm sm:px-4 sm:py-2">
+            <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" /></svg>
             New Category
           </Button>
         </div>
