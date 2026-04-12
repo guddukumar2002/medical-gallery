@@ -34,7 +34,7 @@ function SidebarContent({ onClose }: { onClose?: () => void }) {
   const initials = session?.user?.name?.split(" ").map((n) => n[0]).join("").toUpperCase().slice(0, 2) ?? "A";
 
   return (
-    <div className="w-64 min-h-screen flex flex-col border-r border-slate-800" style={{ background: "#0b1120" }}>
+    <div className="w-64 h-full min-h-screen flex flex-col border-r border-slate-800" style={{ background: "#0b1120" }}>
       {/* Logo */}
       <div className="px-5 py-5 border-b border-slate-800 flex items-center justify-between">
         <div className="flex items-center gap-3">
@@ -125,9 +125,9 @@ export default function Sidebar() {
       </button>
       <aside className="hidden lg:flex flex-shrink-0"><SidebarContent /></aside>
       {mobileOpen && (
-        <div className="lg:hidden fixed top-16 left-0 right-0 bottom-0 z-50 flex">
+        <div className="lg:hidden fixed inset-0 z-50 flex">
           <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={() => setMobileOpen(false)} />
-          <div className="relative z-10"><SidebarContent onClose={() => setMobileOpen(false)} /></div>
+          <div className="relative z-10 flex flex-col h-full overflow-y-auto"><SidebarContent onClose={() => setMobileOpen(false)} /></div>
         </div>
       )}
     </>
