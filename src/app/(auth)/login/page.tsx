@@ -87,36 +87,38 @@ function LoginForm() {
             <span className="font-bold text-white">MedGallery</span>
           </div>
 
-          <div className="rounded-2xl shadow-2xl p-8 border border-slate-700/50" style={{ background: "#1e293b" }}>
+          <div className="rounded-2xl shadow-2xl p-5 sm:p-8 border border-slate-700/50" style={{ background: "#1e293b" }}>
             <div className="mb-6">
               <h1 className="text-2xl font-bold text-white">Welcome back</h1>
               <p className="text-slate-500 text-sm mt-1">Sign in to your admin account to continue</p>
             </div>
 
             {/* Demo credentials banner */}
-            <div className="mb-6 rounded-xl border border-blue-500/30 bg-blue-500/10 p-4">
-              <p className="text-xs font-semibold text-blue-300 mb-3 flex items-center gap-1.5">
-                <span>🎯</span> Demo Credentials — click to auto-fill
-              </p>
-              <div className="flex items-center justify-between gap-3">
-                <div className="space-y-1">
-                  <p className="text-xs text-slate-400">
-                    Email: <span className="text-slate-200 font-mono select-all">{DEMO_EMAIL}</span>
-                  </p>
-                  <p className="text-xs text-slate-400">
-                    Password: <span className="text-slate-200 font-mono select-all">{DEMO_PASSWORD}</span>
-                  </p>
-                </div>
+            <div className="mb-6 rounded-xl border border-blue-500/30 bg-blue-500/10 p-3 sm:p-4">
+              <div className="flex items-center justify-between mb-2">
+                <p className="text-xs font-semibold text-blue-300 flex items-center gap-1.5">
+                  <span>🎯</span> Demo Credentials
+                </p>
                 <button
                   type="button"
                   onClick={fillDemo}
-                  className="flex-shrink-0 flex items-center gap-1.5 px-3 py-2 text-xs font-semibold bg-blue-600 hover:bg-blue-500 active:scale-95 text-white rounded-lg transition-all"
+                  className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold bg-blue-600 hover:bg-blue-500 active:scale-95 text-white rounded-lg transition-all"
                 >
-                  <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                   </svg>
                   Use Demo
                 </button>
+              </div>
+              <div className="space-y-1">
+                <p className="text-xs text-slate-400">
+                  <span className="text-slate-500">Email: </span>
+                  <span className="text-slate-200 font-mono">{DEMO_EMAIL}</span>
+                </p>
+                <p className="text-xs text-slate-400">
+                  <span className="text-slate-500">Password: </span>
+                  <span className="text-slate-200 font-mono">{DEMO_PASSWORD}</span>
+                </p>
               </div>
             </div>
 
