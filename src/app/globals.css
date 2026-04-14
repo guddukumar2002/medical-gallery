@@ -2,6 +2,7 @@
 
 @theme inline {
   --font-sans: var(--font-geist);
+  --breakpoint-xs: 480px;
 }
 
 * { box-sizing: border-box; }

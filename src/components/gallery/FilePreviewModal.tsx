@@ -22,7 +22,7 @@ export default function FilePreviewModal({ file, onClose }: FilePreviewModalProp
 
         {/* Preview */}
         {file.fileType === "IMAGE" ? (
-          <div className="relative w-full h-96 bg-slate-800 rounded-xl overflow-hidden border border-slate-700">
+          <div className="relative w-full h-56 sm:h-80 md:h-96 bg-slate-800 rounded-xl overflow-hidden border border-slate-700">
             {imgError ? (
               <div className="flex flex-col items-center justify-center h-full gap-3 text-slate-500">
                 <svg className="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -36,13 +36,13 @@ export default function FilePreviewModal({ file, onClose }: FilePreviewModalProp
                 alt={file.title}
                 fill
                 className="object-contain"
-                sizes="672px"
+                sizes="(max-width: 640px) 100vw, 672px"
                 onError={() => setImgError(true)}
               />
             )}
           </div>
         ) : (
-          <div className="relative w-full h-[500px] rounded-xl overflow-hidden border border-slate-700 bg-slate-800">
+          <div className="relative w-full h-64 sm:h-96 md:h-[500px] rounded-xl overflow-hidden border border-slate-700 bg-slate-800">
             {pdfLoading && (
               <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 text-slate-500 z-10 bg-slate-800">
                 <svg className="w-10 h-10 animate-pulse text-red-400" fill="currentColor" viewBox="0 0 24 24">
@@ -61,7 +61,7 @@ export default function FilePreviewModal({ file, onClose }: FilePreviewModalProp
         )}
 
         {/* Metadata */}
-        <div className="grid grid-cols-2 gap-3 text-sm">
+        <div className="grid grid-cols-1 xs:grid-cols-2 gap-3 text-sm">
           {file.description && (
             <div className="col-span-2 bg-slate-800 border border-slate-700 rounded-xl p-3">
               <p className="text-slate-500 text-xs uppercase tracking-wide font-medium mb-1">Description</p>
@@ -95,12 +95,12 @@ export default function FilePreviewModal({ file, onClose }: FilePreviewModalProp
         </div>
 
         {/* Actions */}
-        <div className="flex gap-3 pt-1 border-t border-slate-700">
+        <div className="flex flex-wrap gap-2 pt-1 border-t border-slate-700">
           <a
             href={file.fileUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-4 py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 text-white text-sm font-semibold rounded-xl hover:opacity-90 transition-opacity shadow-lg shadow-blue-500/20"
+            className="inline-flex items-center gap-2 px-3 py-2 sm:px-4 sm:py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 text-white text-xs sm:text-sm font-semibold rounded-xl hover:opacity-90 transition-opacity shadow-lg shadow-blue-500/20"
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
@@ -110,7 +110,7 @@ export default function FilePreviewModal({ file, onClose }: FilePreviewModalProp
           <a
             href={file.fileUrl}
             download
-            className="inline-flex items-center gap-2 px-4 py-2.5 bg-slate-700 text-slate-200 text-sm font-semibold rounded-xl hover:bg-slate-600 transition-colors border border-slate-600"
+            className="inline-flex items-center gap-2 px-3 py-2 sm:px-4 sm:py-2.5 bg-slate-700 text-slate-200 text-xs sm:text-sm font-semibold rounded-xl hover:bg-slate-600 transition-colors border border-slate-600"
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
@@ -119,7 +119,7 @@ export default function FilePreviewModal({ file, onClose }: FilePreviewModalProp
           </a>
           <button
             onClick={onClose}
-            className="px-4 py-2.5 text-sm font-semibold text-slate-400 bg-slate-800 border border-slate-700 rounded-xl hover:bg-slate-700 hover:text-white transition-colors ml-auto"
+            className="px-3 py-2 sm:px-4 sm:py-2.5 text-xs sm:text-sm font-semibold text-slate-400 bg-slate-800 border border-slate-700 rounded-xl hover:bg-slate-700 hover:text-white transition-colors ml-auto"
           >
             Close
           </button>

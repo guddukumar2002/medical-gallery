@@ -29,17 +29,17 @@ export default function Modal({ open, onClose, title, children, size = "md" }: M
   const sizes = { sm: "max-w-sm", md: "max-w-md", lg: "max-w-lg", xl: "max-w-2xl" };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4" role="dialog" aria-modal="true">
+    <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4" role="dialog" aria-modal="true">
       <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={onClose} />
       <div
         ref={panelRef}
         tabIndex={-1}
-        className={cn("relative rounded-2xl shadow-2xl w-full outline-none max-h-[90vh] flex flex-col border border-slate-700/50", sizes[size])}
+        className={cn("relative w-full sm:rounded-2xl rounded-t-2xl shadow-2xl outline-none max-h-[92vh] sm:max-h-[90vh] flex flex-col border border-slate-700/50", sizes[size])}
         style={{ background: "#1e293b" }}
       >
         {title && (
-          <div className="flex items-center justify-between px-6 py-4 border-b border-slate-700/50 flex-shrink-0">
-            <h2 className="text-base font-bold text-white">{title}</h2>
+          <div className="flex items-center justify-between px-4 sm:px-6 py-3 sm:py-4 border-b border-slate-700/50 flex-shrink-0">
+            <h2 className="text-sm sm:text-base font-bold text-white truncate pr-4">{title}</h2>
             <button
               onClick={onClose}
               className="w-8 h-8 flex items-center justify-center text-slate-400 hover:text-white hover:bg-slate-700 rounded-lg transition-colors"
@@ -50,7 +50,7 @@ export default function Modal({ open, onClose, title, children, size = "md" }: M
             </button>
           </div>
         )}
-        <div className="p-6 overflow-y-auto">{children}</div>
+        <div className="p-4 sm:p-6 overflow-y-auto">{children}</div>
       </div>
     </div>
   );
